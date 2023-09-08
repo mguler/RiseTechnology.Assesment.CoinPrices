@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement;
-using RiseTechnology.Assesment.CryptoTrader.Data.Model.UserManagement;
+using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Data
 {
