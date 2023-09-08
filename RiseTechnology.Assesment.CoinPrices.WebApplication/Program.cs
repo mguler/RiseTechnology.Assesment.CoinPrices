@@ -1,5 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using RiseTechnology.Assesment.CoinPrices.Business.UserManagement;
+using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
+using RiseTechnology.Assesment.CoinPrices.Core.Impl.Rules;
+using RiseTechnology.Assesment.CoinPrices.Data;
 using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
+using RiseTechnology.Assesment.CoinPrices.Rules.Configurations.UserManagement;
 using RiseTechnology.Assesment.CryptoTrader.Mapping.MappingConfigurations.CryptoManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+var connectionStr = "Server=localhost;Database=CoinPrices;User Id=sa;Password=10105400;TrustServerCertificate=True";
+builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
+    var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
+    optionsBuilder.UseSqlServer(connectionStr);
+    optionsBuilder.EnableSensitiveDataLogging();
+    return new DatabaseContextDefaultImpl(optionsBuilder.Options);
+});
+
+builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();
+builder.Services.AddScoped<UserManagementService>();
 builder.Services.AddMappingService(options =>
 
 #region Crypto Management
@@ -20,6 +36,13 @@ builder.Services.AddMappingService(options =>
 #endregion End Of User Management
 );
 
+builder.Services.AddRuleService(options =>
+#region User Management    
+    options.Add<LoginRuleConfiguration>()
+    .Add<RegisterRuleConfiguration>()
+#endregion End Of User Management
+
+);
 
 
 var app = builder.Build();
