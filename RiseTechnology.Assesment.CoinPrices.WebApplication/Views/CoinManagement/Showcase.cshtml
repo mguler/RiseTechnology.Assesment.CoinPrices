@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="~/js/coin-management/showcase.js"></script>
+
+}
+<div class="container">
+    <div class="col-8 offset-2 card mt-5">
+        <div class="card-header">
+            <div class="row float-start">
+                <div class="col-auto">
+                    <label class="col-form-label">Bitcoin Prices</label>
+                </div>
+            </div>
+            <div class="row float-end">
+                <div class="col-auto">
+                    <label class="col-form-label">Filter</label>
+                </div>
+                <div class="col-auto">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="chart" style="width:50%;height:75%"></canvas>
+    </div>
+
+</div>

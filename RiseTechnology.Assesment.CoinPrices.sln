@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.DataApi", "RiseTechnology.Assesment.CoinPrices.DataApi\RiseTechnology.Assesment.CoinPrices.DataApi.csproj", "{E7475D5B-9CFB-476D-8C89-093096DE599E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APP", "APP", "{BCAECD3C-34A7-4C45-AD86-F1F4AE5B3B2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.WebApplication", "RiseTechnology.Assesment.CoinPrices.WebApplication\RiseTechnology.Assesment.CoinPrices.WebApplication.csproj", "{06C89946-3B82-48CB-A941-D594E9606EC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DATA", "DATA", "{FF7E440C-6F83-4F00-8FF9-A4D37B6F4ECA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.Data.Dto", "RiseTechnology.Assesment.CoinPrices.Data.Dto\RiseTechnology.Assesment.CoinPrices.Data.Dto.csproj", "{B94A0924-1480-4C6A-ACBE-BE347C31F39A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7475D5B-9CFB-476D-8C89-093096DE599E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7475D5B-9CFB-476D-8C89-093096DE599E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7475D5B-9CFB-476D-8C89-093096DE599E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7475D5B-9CFB-476D-8C89-093096DE599E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C89946-3B82-48CB-A941-D594E9606EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C89946-3B82-48CB-A941-D594E9606EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C89946-3B82-48CB-A941-D594E9606EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C89946-3B82-48CB-A941-D594E9606EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7475D5B-9CFB-476D-8C89-093096DE599E} = {BCAECD3C-34A7-4C45-AD86-F1F4AE5B3B2A}
+		{06C89946-3B82-48CB-A941-D594E9606EC5} = {BCAECD3C-34A7-4C45-AD86-F1F4AE5B3B2A}
+		{B94A0924-1480-4C6A-ACBE-BE347C31F39A} = {FF7E440C-6F83-4F00-8FF9-A4D37B6F4ECA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FAE0051-225E-455B-9016-9B7EF8B6BC12}
+	EndGlobalSection
+EndGlobal
