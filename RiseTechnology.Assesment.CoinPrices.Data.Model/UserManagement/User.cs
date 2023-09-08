@@ -2,7 +2,7 @@
 using RiseTechnology.Assesment.CoinPrices.Data.Model;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement.Converters;
 
-namespace RiseTechnology.Assesment.CryptoTrader.Data.Model.UserManagement
+namespace RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement
 {
     public class User : BaseModel
     {

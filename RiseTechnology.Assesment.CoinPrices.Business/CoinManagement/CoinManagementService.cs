@@ -15,9 +15,9 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement
             _dataRepository = dataRepository;
             _mappingerviceProvider = mappingerviceProvider;
         }
-        public void SavePriceInfo(List<CoinPriceInfoDto> cryptoPriceInfoDto)
+        public void SavePriceInfo(List<CoinPriceInfoDto> coinPriceInfoDto)
         {
-            var coinPriceHistory = _mappingerviceProvider.Map<List<CoinPriceHistory>>(cryptoPriceInfoDto);
+            var coinPriceHistory = _mappingerviceProvider.Map<List<CoinPriceHistory>>(coinPriceInfoDto);
             _dataRepository.SaveAll(coinPriceHistory);
         }
 

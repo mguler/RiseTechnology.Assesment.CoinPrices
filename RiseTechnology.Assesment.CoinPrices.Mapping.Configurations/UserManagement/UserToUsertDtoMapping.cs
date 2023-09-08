@@ -1,7 +1,7 @@
 ﻿
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
+using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
-using RiseTechnology.Assesment.CryptoTrader.Data.Model.UserManagement;
 
 namespace RiseTechnology.Assesment.CryptoTrader.Mapping.MappingConfigurations.CryptoManagement
 {
