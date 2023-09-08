@@ -1,7 +1,26 @@
+using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
+using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
+using RiseTechnology.Assesment.CryptoTrader.Mapping.MappingConfigurations.CryptoManagement;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddMappingService(options =>
+
+#region Crypto Management
+    options.Add<CoinPriceHistoryToCoinPriceInfoDtoMapping>()
+    .Add<CoinPriceInfoDtoToCoinPriceHistoryMapping>()
+#endregion End Of Crypto Management
+
+#region User Management
+    .Add<RegisterDtoToUserMapping>()
+    .Add<UserToUsertDtoMapping>()
+#endregion End Of User Management
+);
+
+
 
 var app = builder.Build();
 
