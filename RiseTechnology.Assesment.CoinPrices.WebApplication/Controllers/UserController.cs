@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
-using RiseTechnology.Assesment.CoinPrices.Business.UserManagement;
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.WebApplication.Controllers
 {
     public class UserController : Controller
     {
 
-        private readonly UserManagementService _userManagementService;
+        private readonly IUserManagementService _userManagementService;
 
-        public UserController(UserManagementService userManagementService)
+        public UserController(IUserManagementService userManagementService)
         {
             _userManagementService = userManagementService;
         }
@@ -33,9 +33,9 @@ namespace RiseTechnology.Assesment.CoinPrices.WebApplication.Controllers
         }
 
         [HttpPost]
-        public JsonResult Login(LoginDto loginDto)
+        public JsonResult Login([FromBody]LoginDto loginDto)
         {
-            var result = new ServiceResultDto();
+            var result = _userManagementService.Login(loginDto);
             return Json(result);
         }
 
