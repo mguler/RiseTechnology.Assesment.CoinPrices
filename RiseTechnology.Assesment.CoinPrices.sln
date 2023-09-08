@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DATA", "DATA", "{FF7E440C-6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.Data.Dto", "RiseTechnology.Assesment.CoinPrices.Data.Dto\RiseTechnology.Assesment.CoinPrices.Data.Dto.csproj", "{B94A0924-1480-4C6A-ACBE-BE347C31F39A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CORE", "CORE", "{B216B54A-BB55-45EC-A44E-083B6CA342AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.Core", "RiseTechnology.Assesment.CoinPrices.Core\RiseTechnology.Assesment.CoinPrices.Core.csproj", "{B8B93435-D2B5-454F-8023-4A71D086963C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B94A0924-1480-4C6A-ACBE-BE347C31F39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B93435-D2B5-454F-8023-4A71D086963C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B93435-D2B5-454F-8023-4A71D086963C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B93435-D2B5-454F-8023-4A71D086963C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B93435-D2B5-454F-8023-4A71D086963C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +47,7 @@ Global
 		{E7475D5B-9CFB-476D-8C89-093096DE599E} = {BCAECD3C-34A7-4C45-AD86-F1F4AE5B3B2A}
 		{06C89946-3B82-48CB-A941-D594E9606EC5} = {BCAECD3C-34A7-4C45-AD86-F1F4AE5B3B2A}
 		{B94A0924-1480-4C6A-ACBE-BE347C31F39A} = {FF7E440C-6F83-4F00-8FF9-A4D37B6F4ECA}
+		{B8B93435-D2B5-454F-8023-4A71D086963C} = {B216B54A-BB55-45EC-A44E-083B6CA342AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FAE0051-225E-455B-9016-9B7EF8B6BC12}
