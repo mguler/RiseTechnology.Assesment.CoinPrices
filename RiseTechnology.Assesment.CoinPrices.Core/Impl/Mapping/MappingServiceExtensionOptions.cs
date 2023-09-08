@@ -1,6 +1,6 @@
 ﻿using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 
-namespace RiseTechnology.Assesment.CryptoTrader.Core.Impl.Mapping
+namespace RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping
 {
     public class MappingServiceExtensionOptions
     {
