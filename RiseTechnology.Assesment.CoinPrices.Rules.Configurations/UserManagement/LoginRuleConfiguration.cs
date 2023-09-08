@@ -15,7 +15,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Rules.Configurations.UserManagemen
 
                 if (!registerDto.Email.IsMatch("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$") || !registerDto.Password.IsMatch("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$!%^&*()_+])[A-Za-z\\d@#$!%^&*()_+]{8,16}$"))
                 {
-                    result.Messages.Add("User", "Gecersiz Kullanici");
+                    result.Messages.Add("Login", "Gecersiz Kullanici yada Sifre");
                 }
                 return result;
             });
