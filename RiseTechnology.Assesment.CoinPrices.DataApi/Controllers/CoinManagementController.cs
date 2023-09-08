@@ -1,18 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
+using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 
 namespace RiseTechnology.Assesment.DataApi.Controllers
 {
     public class CoinManagementController : Controller
     {
-        public CoinManagementController()
+
+        private readonly ICoinManagementService _coinManagementService;
+
+        public CoinManagementController(ICoinManagementService coinManagementService)
         {
+            _coinManagementService = coinManagementService;
         }
 
-        [HttpGet]
-        public JsonResult GetPrices(PriceInfoFilter priceInfoFilter) 
+        public JsonResult GetPrices(PriceInfoFilter priceInfoFilter)
         {
-            throw new NotImplementedException();
+            var result = _coinManagementService.GetPriceInfo(priceInfoFilter);
+            return Json(result);
         }
     }
 }

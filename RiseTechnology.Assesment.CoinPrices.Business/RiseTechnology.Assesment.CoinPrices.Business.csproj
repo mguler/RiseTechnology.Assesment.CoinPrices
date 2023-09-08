@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Business.Abstract\RiseTechnology.Assesment.CoinPrices.Business.Abstract.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Core\RiseTechnology.Assesment.CoinPrices.Core.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data.Dto\RiseTechnology.Assesment.CoinPrices.Data.Dto.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data.Model\RiseTechnology.Assesment.CoinPrices.Data.Model.csproj" />

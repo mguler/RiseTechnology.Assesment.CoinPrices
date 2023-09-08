@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
@@ -22,7 +23,7 @@ builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvide
 });
 
 builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();
-builder.Services.AddScoped<UserManagementService>();
+builder.Services.AddScoped<IUserManagementService, UserManagementService>();
 builder.Services.AddMappingService(options =>
 
 #region Crypto Management
@@ -50,7 +51,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }

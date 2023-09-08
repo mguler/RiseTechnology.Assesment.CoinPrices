@@ -1,4 +1,5 @@
 ﻿
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
@@ -6,7 +7,7 @@ using RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement
 {
-    public class CoinManagementService
+    public class CoinManagementService : ICoinManagementService
     {
         private readonly IDataRepository _dataRepository;
         private readonly IMappingServiceProvider _mappingerviceProvider;

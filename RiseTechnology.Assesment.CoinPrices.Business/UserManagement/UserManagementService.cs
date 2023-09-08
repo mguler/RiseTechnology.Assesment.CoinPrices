@@ -1,4 +1,5 @@
-﻿using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
+﻿using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
+using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Rules;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
@@ -7,7 +8,7 @@ using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
 {
-    public class UserManagementService
+    public class UserManagementService: IUserManagementService
     {
         private readonly IDataRepository _dataRepository;
         private readonly IMappingServiceProvider _mappingerviceProvider;
@@ -25,7 +26,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
             {
                 var validationResult = _ruleServiceProvider.Apply("Register", registerDto);
                 result.Message = validationResult.Messages;
-                result.IsSuccessful = validationResult.IsSuccessful;
 
                 if (validationResult.IsSuccessful)
                 {
@@ -56,6 +56,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
             try
             {
                 var validationResult = _ruleServiceProvider.Apply("Login", loginDto);
+                result.Message = validationResult.Messages;
                 if (validationResult.IsSuccessful)
                 {
                     var user = _dataRepository.Get<User>().SingleOrDefault(user => user.Email == loginDto.Username
@@ -63,7 +64,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
 
                     if (user != null)
                     {
-                        var mapped = _mappingerviceProvider.Map<UserDto>(loginDto);
+                        var mapped = _mappingerviceProvider.Map<UserDto>(user);
                         result.IsSuccessful = true;
                     }
                     else 
