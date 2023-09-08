@@ -2,6 +2,7 @@
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RiseTechnology.Assesment.CoinPrices.WebApplication.Controllers
 {
@@ -22,6 +23,7 @@ namespace RiseTechnology.Assesment.CoinPrices.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Logout()
         {
             return Redirect("/");
