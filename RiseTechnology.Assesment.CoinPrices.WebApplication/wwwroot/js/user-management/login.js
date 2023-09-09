@@ -62,6 +62,8 @@ $(async () => {
         if (response.isSuccessful == false) {
             showErrorMessages(response.message);
         } else {
+
+            localStorage.setItem("Token", response.data.token);
             toastr.success('Giris Yatiniz. Yonlendiriliyorsunuz...', 'Giris Basarili!', {
                 "positionClass": "toast-bottom-right",
             });

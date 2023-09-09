@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 
@@ -13,7 +14,7 @@ namespace RiseTechnology.Assesment.DataApi.Controllers
         {
             _coinManagementService = coinManagementService;
         }
-
+        [Authorize]
         public JsonResult GetPrices(PriceInfoFilter priceInfoFilter)
         {
             var result = _coinManagementService.GetPriceInfo(priceInfoFilter);

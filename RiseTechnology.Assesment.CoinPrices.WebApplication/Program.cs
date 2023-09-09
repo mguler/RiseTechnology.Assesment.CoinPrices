@@ -18,35 +18,29 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var config = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json")
-    .Build();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
-var tokenOptions = config.GetSection("Jwt");
+
+var tokenOptions = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<TokenOptions>(tokenOptions);
 
-var connectionStr = "Server=localhost;Database=CoinPrices;User Id=sa;Password=10105400;TrustServerCertificate=True";
-
+var connectionString = builder.Configuration.GetConnectionString("CoinPrices");
 builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
     var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
-    optionsBuilder.UseSqlServer(connectionStr);
-    optionsBuilder.EnableSensitiveDataLogging();
+    optionsBuilder.UseSqlServer(connectionString);
     return new DatabaseContextDefaultImpl(optionsBuilder.Options);
 });
-
 
 builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
 builder.Services.AddScoped<IJwtService, JwtServiceDefaultImpl>();
 builder.Services.AddMappingService(options =>
 
-#region Crypto Management
+#region Coin Management
     options.Add<CoinPriceHistoryToCoinPriceInfoDtoMapping>()
     .Add<CoinPriceInfoDtoToCoinPriceHistoryMapping>()
-#endregion End Of Crypto Management
+#endregion End Of Coin Management
 
 #region User Management
     .Add<RegisterDtoToUserMapping>()
@@ -63,7 +57,7 @@ builder.Services.AddRuleService(options =>
 
 );
 
-var jwtOptions = config.GetSection("Jwt").Get<TokenOptions>();
+var jwtOptions = tokenOptions.Get<TokenOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -78,10 +72,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key)),
                     };
 
-                    options.Events = new JwtBearerEvents { 
+                    options.Events = new JwtBearerEvents
+                    {
                         OnMessageReceived = async context => {
-                          context.Token = context.Request.Cookies["Jwt"];
-                      }
+                            context.Token = context.Request.Cookies["Jwt"];
+                        }
                     };
 
                     options.SaveToken = true;
@@ -101,9 +96,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
 app.UseAuthentication();
-
 app.UseStatusCodePages(async context =>
 {
     if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)

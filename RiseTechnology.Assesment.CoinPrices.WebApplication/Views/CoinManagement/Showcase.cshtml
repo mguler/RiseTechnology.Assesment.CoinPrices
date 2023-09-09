@@ -1,8 +1,12 @@
-﻿@{
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 @section Scripts{
+    <script>const DATA_URL = "@Configuration["Integrations:DataApi"]";</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="~/js/coin-management/showcase.js"></script>
 
@@ -15,25 +19,24 @@
                     <label class="col-form-label">Bitcoin Prices</label>
                 </div>
             </div>
-            <div class="row float-end">
+            <div class="row float-end" style="min-width:150px">
                 <div class="col-auto">
                     <label class="col-form-label">Filter</label>
                 </div>
                 <div class="col-auto">
                     <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
+                        <a id="filterText" class="btn btn-secondary dropdown-toggle" style="min-width:100px"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Today
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" data-key="today" href="#">Today</a></li>
+                            <li><a class="dropdown-item" data-key="month" href="#">Month</a></li>
+                            <li><a class="dropdown-item" data-key="Year" href="#">Year</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <canvas id="chart" style="width:50%;height:75%"></canvas>
+        <canvas id="chart" style="width:50%;height:85%"></canvas>
     </div>
-
 </div>
