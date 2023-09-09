@@ -26,6 +26,7 @@ namespace RiseTechnology.Assesment.CoinPrices.WebApplication.Controllers
         [Authorize]
         public IActionResult Logout()
         {
+            _userManagementService.Logout();
             return Redirect("/");
         }
         [HttpGet]

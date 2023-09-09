@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
-using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 
 namespace RiseTechnology.Assesment.DataApi.Controllers

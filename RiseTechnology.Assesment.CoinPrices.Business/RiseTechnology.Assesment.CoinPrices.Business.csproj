@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Business.Abstract\RiseTechnology.Assesment.CoinPrices.Business.Abstract.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Core\RiseTechnology.Assesment.CoinPrices.Core.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data.Dto\RiseTechnology.Assesment.CoinPrices.Data.Dto.csproj" />

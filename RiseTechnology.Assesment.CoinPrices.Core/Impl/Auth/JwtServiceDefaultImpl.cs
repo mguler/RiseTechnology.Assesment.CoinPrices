@@ -8,14 +8,14 @@ namespace RiseTechnology.Assesment.CoinPrices.Core.Impl.Auth
 {
     public class JwtServiceDefaultImpl : IJwtService
     {
-        public string GenerateToke(string key, string issuer, string audience, int expirationInMinutes, Dictionary<string, string> claims)
+        public string GenerateToken(string key, string issuer, string audience, int expirationInMinutes, Dictionary<string, string> claims)
         {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var keyBytes = Encoding.ASCII.GetBytes(key);
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Issuer = "Issuer",
-                    Audience = "Audience",
+                    Issuer = issuer,
+                    Audience = audience,
                     Subject = new ClaimsIdentity(claims.Keys.Select(claim => new Claim(claim, claims[claim].ToString()))),
                     Expires = DateTime.Now.AddMinutes(7),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)

@@ -1,7 +1,12 @@
-﻿using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
+﻿
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
+using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Auth;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Rules;
+using RiseTechnology.Assesment.CoinPrices.Core.Impl.Configuration;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
@@ -10,14 +15,20 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
 {
     public class UserManagementService: IUserManagementService
     {
+        private readonly IOptions<TokenOptions> _tokenOptions;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDataRepository _dataRepository;
         private readonly IMappingServiceProvider _mappingerviceProvider;
         private readonly IRuleServiceProvider _ruleServiceProvider;
-        public UserManagementService(IDataRepository dataRepository, IMappingServiceProvider mappingerviceProvider, IRuleServiceProvider ruleServiceProvider)
+        private readonly IJwtService _jwtService;
+        public UserManagementService(IOptions<TokenOptions> tokenOptions, IHttpContextAccessor httpContextAccessor, IDataRepository dataRepository, IMappingServiceProvider mappingerviceProvider, IRuleServiceProvider ruleServiceProvider,IJwtService jwtService)
         {
+            _tokenOptions = tokenOptions;
+            _httpContextAccessor = httpContextAccessor;
             _dataRepository = dataRepository;
             _mappingerviceProvider = mappingerviceProvider;
             _ruleServiceProvider = ruleServiceProvider;
+            _jwtService = jwtService;
         }
         public ServiceResultDto Register(RegisterDto registerDto)
         {
@@ -52,7 +63,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
         }
         public ServiceResultDto<LoginResultDto> Login(LoginDto loginDto)
         {
-            var result = new ServiceResultDto<LoginResultDto>();
+            var result = new ServiceResultDto<LoginResultDto> { Data = new LoginResultDto() };
             try
             {
                 var validationResult = _ruleServiceProvider.Apply("Login", loginDto);
@@ -64,7 +75,14 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
 
                     if (user != null)
                     {
-                        var mapped = _mappingerviceProvider.Map<UserDto>(user);
+                        var claims = _mappingerviceProvider.Map<Dictionary<string, string>>(user);
+                        result.Data.Token = _jwtService.GenerateToken(_tokenOptions.Value.Key, _tokenOptions.Value.Issuer, _tokenOptions.Value.Audience, 100, claims);
+                        result.Data.User = _mappingerviceProvider.Map<UserDto>(user);
+                        var cookieOptions = new CookieOptions
+                        {
+                            HttpOnly = true
+                        };
+                        _httpContextAccessor.HttpContext.Response.Cookies.Append("Jwt", result.Data.Token, cookieOptions);
                         result.IsSuccessful = true;
                     }
                     else 
@@ -81,9 +99,11 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
             return result;
         }
 
-        public void Logout() 
+        public ServiceResultDto Logout() 
         {
-            
+            var result = new ServiceResultDto<LoginResultDto> { Data = new LoginResultDto() };
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("Jwt");
+            return result;
         }
     }
 }

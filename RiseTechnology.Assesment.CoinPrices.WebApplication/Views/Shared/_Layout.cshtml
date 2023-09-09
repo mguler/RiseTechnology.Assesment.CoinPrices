@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 ml-auto">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="CoinManagement" asp-action="Showcase">RiseTechnology.Assesment.CoinPrices.WebApplication</a>
+                <a class="navbar-brand" href="/showcase">RiseTechnology.Assesment.CoinPrices.WebApplication</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav" style="margin-left:auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserManagement" asp-action="Logout">Logout</a>
+                                @if (Context.User.Identity.IsAuthenticated)
+                                {
+                                <a class="nav-link text-dark" href="/logout">Logout</a>
+                            } else
+                            {
+                                <a class="nav-link text-dark" href="/login">Login</a>
+                            }
                         </li>
                     </ul>
                 </div>

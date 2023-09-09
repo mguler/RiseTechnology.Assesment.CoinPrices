@@ -65,7 +65,7 @@ $(async () => {
             toastr.success('Giris Yatiniz. Yonlendiriliyorsunuz...', 'Giris Basarili!', {
                 "positionClass": "toast-bottom-right",
             });
-            setTimeout(() => window.location.href = "/", 3000);
+            setTimeout(() => window.location.href = "/showcase", 3000);
         }
     });
 });

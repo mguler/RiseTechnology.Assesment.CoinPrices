@@ -27,7 +27,7 @@ $(async () => {
             input.setCustomValidity("Invalid field.");
             feedback.classList.remove("valid-feedback");
             feedback.classList.add("invalid-feedback");
-            feedback.innerHTML = messages[key];
+            feedback.innerText = messages[key];
         }
 
         if (messages["Register"]) {
@@ -44,14 +44,14 @@ $(async () => {
     };
 
     let hideErrorMessages = () => {
-        document.querySelectorAll(`.is-valid, .is-invalid, .valid-feedback, .valid-feedback, form`)
+        document.querySelector("form").classList.remove("was-validated");
+        document.querySelectorAll(`.is-valid, .is-invalid, .valid-feedback, .valid-feedback`)
             .forEach(item => {
                 item.classList.remove("is-valid");
                 item.classList.remove("is-invalid");
                 item.classList.remove("valid-feedback");
                 item.classList.remove("invalid-feedback");
-                item.classList.remove("was-validated");
-                item.innerHTML = "";
+                item.innerText = "";
                 if (item.setCustomValidity) {
                     item.setCustomValidity("");
                 };

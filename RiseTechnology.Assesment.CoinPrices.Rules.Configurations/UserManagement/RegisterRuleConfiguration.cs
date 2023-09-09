@@ -19,12 +19,12 @@ namespace RiseTechnology.Assesment.CoinPrices.Rules.Configurations.UserManagemen
                     return result;
                 }
 
-                if (string.IsNullOrEmpty(registerDto.Firstname) || !registerDto.Firstname.IsMatch("^[A-Za-z ]{2,16}$")) 
+                if (string.IsNullOrEmpty(registerDto.Firstname) || !registerDto.Firstname.IsMatch("^[A-Za-zÇĞİÖŞÜçğıöşü ]{2,16}$")) 
                 {
                     result.Messages.Add("Firstname", "Isim alani 2-16 karakter uzunlugunda harf ve bosluktan olusabilir");
                 }
 
-                if (string.IsNullOrEmpty(registerDto.Lastname) || !registerDto.Lastname.IsMatch("^[A-Za-z ]{2,16}$"))
+                if (string.IsNullOrEmpty(registerDto.Lastname) || !registerDto.Lastname.IsMatch("^[A-Za-zÇĞİÖŞÜçğıöşü ]{2,16}$"))
                 {
                     result.Messages.Add("Lastname", "Soyisim alani 2-16 karakter uzunlugunda harf ve bosluktan olusabilir");
                 }
