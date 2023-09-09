@@ -8,10 +8,11 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
     {
         public DatabaseContextDefaultImpl(DbContextOptions<DatabaseContextDefaultImpl> options) : base(options)
         {
-
+            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
 
             #region Crypto Management

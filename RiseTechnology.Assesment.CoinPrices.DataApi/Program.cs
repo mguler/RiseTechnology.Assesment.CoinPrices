@@ -29,7 +29,10 @@ builder.Services.AddControllers();
 var tokenOptions = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<TokenOptions>(tokenOptions);
 
-var connectionString = builder.Configuration.GetConnectionString("CoinPrices");
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
+var connectionName = environment == "docker" ? "CoinPricesDocker" : "CoinPrices";
+var connectionString = builder.Configuration.GetConnectionString(connectionName);
+
 builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
     var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
     optionsBuilder.UseSqlServer(connectionString);
@@ -90,7 +93,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors(corsPolicyName);

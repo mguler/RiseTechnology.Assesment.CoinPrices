@@ -36,7 +36,7 @@ $(async () => {
             });
         }
 
-        if (message["Error"]) {
+        if (messages["Error"]) {
             toastr.error(message["Error"], 'Dikkat!', {
                 "positionClass": "toast-bottom-right",
             });

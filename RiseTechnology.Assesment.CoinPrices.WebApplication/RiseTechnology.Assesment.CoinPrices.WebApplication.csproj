@@ -19,4 +19,10 @@
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Rules.Configurations\RiseTechnology.Assesment.CoinPrices.Rules.Configurations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\css\site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  host_app:
+    container_name: HostApp
+    build: ./HostApp
+    networks:
+      - risenetwork
+    # depends_on:
+    #   - db2019
+
+  data_api:
+    container_name: DataApi
+    build: ./DataApi
+    ports:
+      - 81:5000
+    networks:
+      - risenetwork
+    # depends_on:
+    #   - db2019
+
+  web_application:
+    container_name: WebApplication
+    build: ./WebApplication
+    ports:
+      - 80:5000
+    networks:
+      - risenetwork
+    # depends_on:
+    #   - db2019
+  
+
+#   db2019:
+#     build: ./MSSqlServer
+#     # restart: always
+#     # mem_limit: 1024m
+#     ports:
+#       - 1433:1433
+#     # volumes:
+#     #   - ./datadrive/MSSqlServer/data:/var/opt/mssql/data
+#     #   - ./datadrive/MSSqlServer/log:/var/opt/mssql/log
+#     #   - ./datadrive/MSSqlServer/backup:/var/opt/mssql/backup
+#     environment:
+#       MSSQL_SA_PASSWORD: "murat123456!"
+#       ACCEPT_EULA: "Y"
+#       MSSQL_PID: "Enterprise"
+#     networks:
+#       - risenetwork
+
+# networks:
+#   risenetwork:
