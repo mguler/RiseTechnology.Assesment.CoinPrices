@@ -7,6 +7,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement
     {
         ServiceResultDto Register(RegisterDto registerDto);
         ServiceResultDto<LoginResultDto> Login(LoginDto loginDto);
-        void Logout();
+        ServiceResultDto Logout();
     }
 }

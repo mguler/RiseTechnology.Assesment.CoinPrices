@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.UserManagement;
+using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Auth;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
+using RiseTechnology.Assesment.CoinPrices.Core.Impl.Auth;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Configuration;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Rules;
@@ -12,6 +14,7 @@ using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Rules.Configurations.UserManagement;
 using RiseTechnology.Assesment.CryptoTrader.Mapping.MappingConfigurations.CryptoManagement;
 using System.Net;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +22,14 @@ var config = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
     .Build();
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+var tokenOptions = config.GetSection("Jwt");
+builder.Services.Configure<TokenOptions>(tokenOptions);
 
 var connectionStr = "Server=localhost;Database=CoinPrices;User Id=sa;Password=10105400;TrustServerCertificate=True";
+
 builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
     var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
     optionsBuilder.UseSqlServer(connectionStr);
@@ -31,8 +37,10 @@ builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvide
     return new DatabaseContextDefaultImpl(optionsBuilder.Options);
 });
 
+
 builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
+builder.Services.AddScoped<IJwtService, JwtServiceDefaultImpl>();
 builder.Services.AddMappingService(options =>
 
 #region Crypto Management
@@ -43,6 +51,7 @@ builder.Services.AddMappingService(options =>
 #region User Management
     .Add<RegisterDtoToUserMapping>()
     .Add<UserToUsertDtoMapping>()
+    .Add<UserToDictionaryMapping>()
 #endregion End Of User Management
 );
 
@@ -54,33 +63,31 @@ builder.Services.AddRuleService(options =>
 
 );
 
-var jwtOptions = config.GetSection("JwtOptions").Get<TokenOptions>();
+var jwtOptions = config.GetSection("Jwt").Get<TokenOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        //ValidateIssuer = true,
-                        //ValidateAudience = true,
-                        //ValidateLifetime = true,
-                        //ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtOptions.Issuer,
                         ValidAudience = jwtOptions.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key)),
                     };
+
+                    options.Events = new JwtBearerEvents { 
+                        OnMessageReceived = async context => {
+                          context.Token = context.Request.Cookies["Jwt"];
+                      }
+                    };
+
                     options.SaveToken = true;
                 });
 
 var app = builder.Build();
-
-app.UseStatusCodePages(async context =>
-{
-    if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
-    {
-        context.HttpContext.Response.Redirect("/login");
-    }
-});
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -94,12 +101,21 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+
 app.UseAuthentication();
+
+app.UseStatusCodePages(async context =>
+{
+    if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+    {
+        context.HttpContext.Response.Redirect("/login");
+    }
+});
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=User}/{action=Login}");
+    pattern: "{controller=CoinManagement}/{action=Showcase}");
 
 #region User Management
 app.MapControllerRoute(name: "user-registration", pattern: "register", defaults: new { controller = "User", action = "Register" });

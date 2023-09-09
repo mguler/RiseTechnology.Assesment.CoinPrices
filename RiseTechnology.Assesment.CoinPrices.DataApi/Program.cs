@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement;
-using RiseTechnology.Assesment.CoinPrices.Business.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data;
