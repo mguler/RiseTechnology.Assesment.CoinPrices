@@ -2,7 +2,7 @@
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement;
 
-namespace RiseTechnology.Assesment.CryptoTrader.Mapping.MappingConfigurations.CryptoManagement
+namespace RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.UserManagement
 {
     public class UserToDictionaryMapping : IMappingConfiguration
     {

@@ -3,7 +3,7 @@ using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement;
 using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
 
-namespace RiseTechnology.Assesment.CryptoTrader.Mapping.MappingConfigurations.CryptoManagement
+namespace RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.UserManagement
 {
     public class UserToUsertDtoMapping : IMappingConfiguration
     {

@@ -7,6 +7,7 @@ using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Configuration;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data;
+using RiseTechnology.Assesment.CoinPrices.Data.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
 using System.Text;
 
@@ -33,10 +34,10 @@ var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
 var connectionName = environment == "docker" ? "CoinPricesDocker" : "CoinPrices";
 var connectionString = builder.Configuration.GetConnectionString(connectionName);
 
-builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
-    var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
+builder.Services.AddScoped<DbContext, CoinPricesDatabaseContextDefaultImpl>(serviceProvider => {
+    var optionsBuilder = new DbContextOptionsBuilder<CoinPricesDatabaseContextDefaultImpl>();
     optionsBuilder.UseSqlServer(connectionString);
-    return new DatabaseContextDefaultImpl(optionsBuilder.Options);
+    return new CoinPricesDatabaseContextDefaultImpl(optionsBuilder.Options);
 });
 
 builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();

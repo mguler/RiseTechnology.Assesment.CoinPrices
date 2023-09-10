@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RiseTechnology.Assesment.CoinPrices.Data;
+using RiseTechnology.Assesment.CoinPrices.Data.CoinManagement;
 
 #nullable disable
 
 namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations
 {
-    [DbContext(typeof(DatabaseContextDefaultImpl))]
-    [Migration("20230908163051_initial")]
+    [DbContext(typeof(CoinPricesDatabaseContextDefaultImpl))]
+    [Migration("20230910053138_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -50,45 +50,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CoinPriceHistory", "CoinManagement");
-                });
-
-            modelBuilder.Entity("RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
-
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User", "UserManagement");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations
+namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations.UserDatabaseContextDefaultImplMigrations
 {
     /// <inheritdoc />
     public partial class initial : Migration
@@ -11,27 +11,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "CoinManagement");
-
-            migrationBuilder.EnsureSchema(
                 name: "UserManagement");
-
-            migrationBuilder.CreateTable(
-                name: "CoinPriceHistory",
-                schema: "CoinManagement",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Symbol = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,8)", precision: 18, scale: 8, nullable: false),
-                    Timestamp = table.Column<long>(type: "bigint", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CoinPriceHistory", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "User",
@@ -56,10 +36,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CoinPriceHistory",
-                schema: "CoinManagement");
-
             migrationBuilder.DropTable(
                 name: "User",
                 schema: "UserManagement");

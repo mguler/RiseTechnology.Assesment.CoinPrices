@@ -7,7 +7,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
     /// <summary>
     /// The default implementation of "IDataRepository" interface that supplies database access and basic functionality
     /// </summary>
-    public class DataRepositoryDefaultImpl :IDataRepository
+    public class DataRepositoryDefaultImpl : IDataRepository
     {
         private readonly DbContext _dataContext;
         private readonly Dictionary<string, IClrPropertyGetter> _primaryKeyCache = new Dictionary<string, IClrPropertyGetter>();
@@ -55,14 +55,15 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
             else
             {
                 var primaryKey = _dataContext.Model.GetEntityTypes()?.FirstOrDefault(entityType => entityType.ClrType.FullName == key)?.FindPrimaryKey();
-                if (primaryKey != null) 
+                if (primaryKey != null)
                 {
                     getter = primaryKey.Properties.FirstOrDefault()?.GetGetter();
                     _primaryKeyCache.Add(key, getter);
                 }
             }
 
-            if (getter is null) {
+            if (getter is null)
+            {
                 throw new Exception($"There is no primary key defined for the type {typeof(T)}");
             }
 
