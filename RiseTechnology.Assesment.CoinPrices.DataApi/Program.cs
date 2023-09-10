@@ -29,10 +29,7 @@ builder.Services.AddControllers();
 var tokenOptions = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<TokenOptions>(tokenOptions);
 
-var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
-var connectionName = environment == "docker" ? "CoinPricesDocker" : "CoinPrices";
-var connectionString = builder.Configuration.GetConnectionString(connectionName);
-
+var connectionString = builder.Configuration.GetConnectionString("CoinPrices");
 builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
     var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
     optionsBuilder.UseSqlServer(connectionString);
@@ -102,7 +99,7 @@ app.UseAuthorization();
 
 
 #region Coin Management
-app.MapControllerRoute(name: "get-prices", pattern: "get-prices-{priceInfoFilter:regex(today|lastMonth|lastYear)}", defaults: new { controller = "CoinManagement", action = "GetPrices" });
+app.MapControllerRoute(name: "get-prices", pattern: "get-prices-{priceInfoFilter:regex(today|month|year)}", defaults: new { controller = "CoinManagement", action = "GetPrices" });
 #endregion End Of Coin Management
 
 app.Run();

@@ -3,12 +3,10 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
-    var urlConfig = environment == "docker" ? "Integrations:DataApiDocker" : "Integrations:DataApi";
 }
 
 @section Scripts{
-    <script>const DATA_URL = "@Configuration[urlConfig]";</script>
+    <script>const DATA_URL = "@Configuration["Integrations:DataApi"]";</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="~/js/coin-management/showcase.js"></script>
 
@@ -33,7 +31,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" data-key="today" href="#">Today</a></li>
                             <li><a class="dropdown-item" data-key="month" href="#">Month</a></li>
-                            <li><a class="dropdown-item" data-key="Year" href="#">Year</a></li>
+                            <li><a class="dropdown-item" data-key="year" href="#">Year</a></li>
                         </ul>
                     </div>
                 </div>

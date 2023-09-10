@@ -25,10 +25,7 @@ builder.Services.AddHttpContextAccessor();
 var tokenOptions = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<TokenOptions>(tokenOptions);
 
-var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
-var connectionName = environment == "docker" ? "CoinPricesDocker" : "CoinPrices";
-var connectionString = builder.Configuration.GetConnectionString(connectionName);
-
+var connectionString = builder.Configuration.GetConnectionString("CoinPrices");
 builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
     var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
     optionsBuilder.UseSqlServer(connectionString);

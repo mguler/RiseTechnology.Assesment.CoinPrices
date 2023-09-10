@@ -38,12 +38,10 @@ namespace RiseTechnology.Assesment.CoinPrices.Rules.Configurations.UserManagemen
                 {
                     result.Messages.Add("Password", "Sifre 8-16 karakter uzunlugunda buyuk/kucuk harf ,rakam ve @#$!%^&*()_+ karakterlerinden en az bir tanesinden olusmalidir");
                 }
-
-                if (string.IsNullOrEmpty(registerDto.RePassword) || registerDto.Password != registerDto.RePassword) 
+                else if (registerDto.Password != registerDto.RePassword)
                 {
                     result.Messages.Add("RePassword", "Girilen iki sifre birbirinin ayni olmalidir");
                 }
-
                 return result;
             });
         }
