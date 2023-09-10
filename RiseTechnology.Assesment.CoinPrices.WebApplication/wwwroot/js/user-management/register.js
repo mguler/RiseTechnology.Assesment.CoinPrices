@@ -31,13 +31,13 @@ $(async () => {
         }
 
         if (messages["Register"]) {
-            toastr.error(messages["Register"], 'Dikkat!', {
+            toastr.error(messages["Register"], 'Attention!', {
                 "positionClass": "toast-bottom-right",
             });
         }
 
         if (messages["Error"]) {
-            toastr.error(message["Error"], 'Dikkat!', {
+            toastr.error(messages["Error"], 'Attention!', {
                 "positionClass": "toast-bottom-right",
             });
         }
@@ -58,7 +58,6 @@ $(async () => {
             });
     };
 
-
     let button = document.querySelector("#submitbutton");
     button.addEventListener("click", async e => {
         e.preventDefault();
@@ -73,7 +72,7 @@ $(async () => {
             showErrorMessages(response.message);
         } else {
 
-            toastr.success('Giris Ekranina Yonlendiriliyorsunuz', 'Kayit Basarili!', {
+            toastr.success('Your redirecting...', 'Successful!', {
                 "positionClass": "toast-bottom-right",
             });
             setTimeout(() => window.location.href = "/login", 3000);

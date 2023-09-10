@@ -25,7 +25,16 @@ $(async () => {
                     resolve(data);
                 },
                 error: function (req, status) {
-                    if (req.status == 200) { }
+                    if (req.status == 401) {
+                        toastr.warning("You are not authorized to access this resource", 'Attention!', {
+                            "positionClass": "toast-bottom-right",
+                        });
+                    } else
+                    {
+                        toastr.error("An error occured. Please contact to system administrator", 'Attention!', {
+                            "positionClass": "toast-bottom-right",
+                        });
+                    }
                 }
             });
         });
