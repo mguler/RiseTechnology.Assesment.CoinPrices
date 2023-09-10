@@ -64,7 +64,7 @@ $(async () => {
         } else {
 
             localStorage.setItem("Token", response.data.token);
-            toastr.success('Giris Yatiniz. Yonlendiriliyorsunuz...', 'Giris Basarili!', {
+            toastr.success('You are redirecting...', 'Successful', {
                 "positionClass": "toast-bottom-right",
             });
             setTimeout(() => window.location.href = "/showcase", 3000);

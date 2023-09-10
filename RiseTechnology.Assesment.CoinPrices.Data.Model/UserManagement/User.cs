@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RiseTechnology.Assesment.CoinPrices.Data.Model;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement.Converters;
 
 namespace RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement

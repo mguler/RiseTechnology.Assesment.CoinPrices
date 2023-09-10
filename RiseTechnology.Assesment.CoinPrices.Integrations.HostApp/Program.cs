@@ -2,10 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Quartz;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Integrations.BinanceImpl;
-using RiseTechnology.Assesment.CoinPrices.Integrations.HostApp;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Data;
@@ -19,7 +17,9 @@ IConfiguration configuration = new ConfigurationBuilder()
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        var connectionString = configuration.GetConnectionString("CoinPrices");
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
+        var connectionName = environment == "docker" ? "CoinPricesDocker" : "CoinPrices";
+        var connectionString = configuration.GetConnectionString(connectionName);
 
         services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
             var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
@@ -28,20 +28,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         });
 
         services.AddTransient<IDataRepository, DataRepositoryDefaultImpl>();
-        services.AddTransient<QuartzNetDefaultDataIntegrationJobImpl<BinanceDataIntegrationProvider>>();
-
-        //Schedule task for every 1 minute
-        services.AddQuartz( quartz => {
-            quartz.ScheduleJob<QuartzNetDefaultDataIntegrationJobImpl<BinanceDataIntegrationProvider>>(trigger => trigger
-                .StartNow().WithSimpleSchedule(s=>s.WithIntervalInSeconds(3)));
-                //.WithSimpleSchedule(;
-                //.WithCronSchedule("0 0/1 * 1/1 * ? *"));
-        });
-
-        services.AddQuartzHostedService(options =>
-        {
-            options.WaitForJobsToComplete = true;
-        });
+        services.AddHostedService<BinanceIntegrationService>();
 
         services.AddMappingService(options =>
 
