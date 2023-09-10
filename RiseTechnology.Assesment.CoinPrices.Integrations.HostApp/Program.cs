@@ -17,10 +17,8 @@ IConfiguration configuration = new ConfigurationBuilder()
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
-        var connectionName = environment == "docker" ? "CoinPricesDocker" : "CoinPrices";
-        var connectionString = configuration.GetConnectionString(connectionName);
 
+        var connectionString = configuration.GetConnectionString("CoinPrices");
         services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvider => {
             var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
             optionsBuilder.UseSqlServer(connectionString);

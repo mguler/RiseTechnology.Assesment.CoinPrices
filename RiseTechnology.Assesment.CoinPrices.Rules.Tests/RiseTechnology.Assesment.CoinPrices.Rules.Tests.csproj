@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Business\RiseTechnology.Assesment.CoinPrices.Business.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Core\RiseTechnology.Assesment.CoinPrices.Core.csproj" />
-    <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data.Model\RiseTechnology.Assesment.CoinPrices.Data.Model.csproj" />
+    <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data.Dto\RiseTechnology.Assesment.CoinPrices.Data.Dto.csproj" />
+    <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Rules.Configurations\RiseTechnology.Assesment.CoinPrices.Rules.Configurations.csproj" />
   </ItemGroup>
 
 </Project>

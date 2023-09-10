@@ -2,6 +2,6 @@
 {
     public enum PriceInfoFilter
     {
-        Today,LastMonth,LastYear
+        Today = 1, Month = 30, Year = 365
     }
 }
