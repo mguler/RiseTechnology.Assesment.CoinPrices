@@ -37,4 +37,6 @@ using IHost host = Host.CreateDefaultBuilder(args)
     })
     .Build();
 
+var dbContext = host.Services.GetService<DbContext>();
+dbContext.Database.EnsureCreated();
 await host.RunAsync();
