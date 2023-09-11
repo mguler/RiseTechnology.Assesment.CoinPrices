@@ -1,5 +1,4 @@
-﻿
-$(async () => {
+﻿$(async () => {
 
     let filter = "today";
     let chart = null;
@@ -42,27 +41,28 @@ $(async () => {
 
     let renderData = (data) => {
 
+        let prices = data?.prices?.map(item => item.price);
+        let labels = data?.labels;
+        
         if (!chart) {
             chart = new Chart("chart", {
                 type: "line",
                 height: "100%",
                 options: {
                     legend: { display: false },
-                    scales: {
-                        yAxes: [{ ticks: { min: 6, max: 16 } }],
-                    }
+                    scales: { }
                 }
             });
         }
 
         chart.data = {
-            labels : [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+            labels : labels,
             datasets: [{
                 fill: false,
                 lineTension: 0,
                 backgroundColor: "rgba(0,0,255,1.0)",
                 borderColor: "rgba(0,0,255,0.1)",
-                data: data
+                data: prices
             }]
         };
         chart.update();  

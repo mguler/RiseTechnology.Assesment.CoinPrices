@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement;
+using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManagementServiceParameticImpl;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Configuration;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
@@ -38,6 +39,19 @@ builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvide
 
 builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();
 builder.Services.AddScoped<ICoinManagementService, CoinManagementService>();
+
+builder.Services.AddScoped<CoinManagementServiceDailyImpl>();
+builder.Services.AddScoped<CoinManagementServiceMonthlyImpl>();
+builder.Services.AddScoped<CoinManagementServiceAnnualImpl>();
+builder.Services.AddScoped(serviceProvider => {
+    var services = new Dictionary<string, ICoinManagementService>
+    {
+        { "Today", serviceProvider.GetService<CoinManagementServiceDailyImpl>() },
+        { "Month", serviceProvider.GetService<CoinManagementServiceMonthlyImpl>() },
+        { "Year", serviceProvider.GetService<CoinManagementServiceAnnualImpl>() }
+    };
+    return services;
+});
 builder.Services.AddMappingService(options =>
 
 #region Coin Management

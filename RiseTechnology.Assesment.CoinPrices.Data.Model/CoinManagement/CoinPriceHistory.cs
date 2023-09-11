@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement.Converters;
 
 namespace RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement
 {
@@ -7,7 +6,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement
     {
         public string Symbol { get;set; }
         public decimal Price { get; set; }
-        public DateTime Timestamp { get; set; } = DateTime.Now;
+        public long Timestamp { get; set; }
         
         public static void FluentInitAndSeed(ModelBuilder modelBuilder)
         {
@@ -20,8 +19,9 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement
                 #region Property List
                 entity.Property(e => e.Symbol).IsRequired().HasMaxLength(16);
                 entity.Property(e => e.Price).IsRequired().HasPrecision(18, 8);
-                entity.Property(e => e.Timestamp).IsRequired().HasConversion<UnixTimestampConverter>();
+                entity.Property(e => e.Timestamp).IsRequired();
                 #endregion
+
             });
         }
     }
