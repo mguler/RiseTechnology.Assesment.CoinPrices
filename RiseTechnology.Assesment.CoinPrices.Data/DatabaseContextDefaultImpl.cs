@@ -8,7 +8,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
     {
         public DatabaseContextDefaultImpl(DbContextOptions<DatabaseContextDefaultImpl> options) : base(options)
         {
-            
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

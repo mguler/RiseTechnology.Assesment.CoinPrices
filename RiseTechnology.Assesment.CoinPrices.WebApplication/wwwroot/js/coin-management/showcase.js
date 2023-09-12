@@ -41,7 +41,7 @@
 
     let renderData = (data) => {
 
-        let prices = data?.prices?.map(item => item.price);
+        let prices = data?.prices?.map(item => item?.price);
         let labels = data?.labels;
         
         if (!chart) {

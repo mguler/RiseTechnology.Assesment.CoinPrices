@@ -6,4 +6,10 @@
         }
     });
 
+    document.querySelector("#logout").addEventListener("click", e => {
+        localStorage.removeItem("Token");
+        window.location.href = "/logout";
+
+    });
+
 })

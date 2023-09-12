@@ -32,7 +32,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManage
             var pricesResult = _mappingerviceProvider.Map<List<CoinPriceInfoDto>>(prices);
             var monthsCount = 1+Math.Abs(12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month);
 
-
             var labels = Enumerable
                 .Range(0, monthsCount)
                 .Select(n => startDate.AddMonths(n)).Select(item => item.ToString("yyyy-MMM")).ToList();

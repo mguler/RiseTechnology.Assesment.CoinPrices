@@ -30,13 +30,15 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManage
                 }).ToList();
 
             var pricesResult = _mappingerviceProvider.Map<List<CoinPriceInfoDto>>(prices);
+            
             var labels = Enumerable
                 .Range(0, 25)
                 .Select(n => startDate.AddHours(n)).Select(item => item.ToString("hh:00")).ToList();
 
+
             var result = new GetPriceInfoResultDto
             {
-                Prices = pricesResult,
+                Prices = pricesResult, 
                 Labels = labels
             };
             return result;

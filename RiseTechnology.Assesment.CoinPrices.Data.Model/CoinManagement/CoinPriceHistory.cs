@@ -7,6 +7,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement
         public string Symbol { get;set; }
         public decimal Price { get; set; }
         public long Timestamp { get; set; }
+        public long GroupId { get; set; }
         
         public static void FluentInitAndSeed(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement
                 entity.Property(e => e.Symbol).IsRequired().HasMaxLength(16);
                 entity.Property(e => e.Price).IsRequired().HasPrecision(18, 8);
                 entity.Property(e => e.Timestamp).IsRequired();
+                entity.Ignore(e => e.GroupId);
                 #endregion
 
             });
