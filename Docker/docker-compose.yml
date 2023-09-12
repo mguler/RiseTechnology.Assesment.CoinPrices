@@ -24,8 +24,8 @@ services:
     build: ./HostApp
     networks:
       - risenetwork
-    # depends_on:
-    #   - db2019
+    depends_on:
+      - db2019
 
   data_api:
     container_name: DataApi
@@ -34,8 +34,8 @@ services:
       - 81:5000
     networks:
       - risenetwork
-    # depends_on:
-    #   - db2019
+    depends_on:
+      - db2019
 
   web_application:
     container_name: WebApplication
@@ -44,8 +44,8 @@ services:
       - 80:5000
     networks:
       - risenetwork
-    # depends_on:
-    #   - db2019
+    depends_on:
+      - db2019
 
 networks:
    risenetwork:

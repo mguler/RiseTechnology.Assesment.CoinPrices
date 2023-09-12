@@ -11,7 +11,7 @@ using RiseTechnology.Assesment.CoinPrices.Data;
 namespace RiseTechnology.Assesment.CoinPrices.Data.Migrations
 {
     [DbContext(typeof(DatabaseContextDefaultImpl))]
-    [Migration("20230908163051_initial")]
+    [Migration("20230911052758_initial")]
     partial class initial
     {
         /// <inheritdoc />

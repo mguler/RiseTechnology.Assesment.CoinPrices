@@ -2,9 +2,9 @@
 
 namespace RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement.Converters
 {
-    public class UnixTimestampConverter : ValueConverter<DateTime, long>
+    public class TimestampConverter : ValueConverter<DateTime, long>
     {
-        public UnixTimestampConverter()
+        public TimestampConverter()
             : base(
                 value => new DateTimeOffset(value).ToUnixTimeSeconds(),
                 value => DateTimeOffset.FromUnixTimeSeconds(value).Date)

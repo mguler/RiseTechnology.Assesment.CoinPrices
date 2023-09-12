@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement;
+using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManagementServiceParameticImpl;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Configuration;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
@@ -38,6 +39,19 @@ builder.Services.AddScoped<DbContext, DatabaseContextDefaultImpl>(serviceProvide
 
 builder.Services.AddScoped<IDataRepository, DataRepositoryDefaultImpl>();
 builder.Services.AddScoped<ICoinManagementService, CoinManagementService>();
+
+builder.Services.AddScoped<CoinManagementServiceDailyImpl>();
+builder.Services.AddScoped<CoinManagementServiceMonthlyImpl>();
+builder.Services.AddScoped<CoinManagementServiceAnnualImpl>();
+builder.Services.AddScoped(serviceProvider => {
+    var services = new Dictionary<string, ICoinManagementService>
+    {
+        { "Today", serviceProvider.GetService<CoinManagementServiceDailyImpl>() },
+        { "Month", serviceProvider.GetService<CoinManagementServiceMonthlyImpl>() },
+        { "Year", serviceProvider.GetService<CoinManagementServiceAnnualImpl>() }
+    };
+    return services;
+});
 builder.Services.AddMappingService(options =>
 
 #region Coin Management
@@ -61,23 +75,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         ValidAudience = jwtOptions.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key)),
                     };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = async context =>
-                        {
-
-                        },
-                        OnAuthenticationFailed = async context =>
-                        {
-
-                        },
-                        OnMessageReceived = async context =>
-                        {
-
-                        }
-                    };
-
                     options.SaveToken = true;
                 });
 
@@ -97,9 +94,11 @@ app.UseCors(corsPolicyName);
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 #region Coin Management
 app.MapControllerRoute(name: "get-prices", pattern: "get-prices-{priceInfoFilter:regex(today|month|year)}", defaults: new { controller = "CoinManagement", action = "GetPrices" });
 #endregion End Of Coin Management
+
+var dbContext = app.Services.CreateScope().ServiceProvider.GetService<DbContext>();
+dbContext.Database.EnsureCreated();
 
 app.Run();

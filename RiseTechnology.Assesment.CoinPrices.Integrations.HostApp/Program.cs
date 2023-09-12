@@ -7,9 +7,11 @@ using RiseTechnology.Assesment.CoinPrices.Integrations.BinanceImpl;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Data;
+using RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl;
 
 IConfiguration configuration = new ConfigurationBuilder()
    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+   .AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true)
    .AddEnvironmentVariables()
    .AddCommandLine(args)
    .Build();
@@ -26,7 +28,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         });
 
         services.AddTransient<IDataRepository, DataRepositoryDefaultImpl>();
-        services.AddHostedService<BinanceIntegrationService>();
+        services.AddHostedService<CoinDeskIntegrationService>();
 
         services.AddMappingService(options =>
 
@@ -37,4 +39,6 @@ using IHost host = Host.CreateDefaultBuilder(args)
     })
     .Build();
 
+var dbContext = host.Services.GetService<DbContext>();
+dbContext.Database.EnsureCreated();
 await host.RunAsync();

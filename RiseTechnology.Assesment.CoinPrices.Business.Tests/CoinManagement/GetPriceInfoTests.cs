@@ -1,27 +1,47 @@
 using Moq;
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement;
+using RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManagementServiceParameticImpl;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 using RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement;
-using RiseTechnology.Assesment.CoinPrices.Data.Model.UserManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
 {
     [TestClass]
     public class GetPriceInfoTests
     {
+        [TestMethod("Should invoke the inner service")]
+        public void ShouldInvokeTheInnerService()
+        {
+            var invoked = false;
+            var innerServiceSetup = new Mock<ICoinManagementService>();
+            var dictionary = new Dictionary<string, ICoinManagementService>(); 
+
+            innerServiceSetup.Setup(m => m.GetPriceInfo(It.IsAny<PriceInfoFilter>())).Callback<PriceInfoFilter>(filter =>
+            {
+                invoked = true;
+            });
+
+            dictionary.Add("Month", innerServiceSetup.Object);
+            var service = new CoinManagementService(dictionary);
+
+            service.GetPriceInfo(PriceInfoFilter.Month);
+            Assert.IsTrue(invoked);
+        }
+
         [TestMethod("Should return last 24 hour data")]
         public void ShouldReturnLast24HourData()
         {
-            var today = DateTime.Now;
-            var yesterday = today.AddDays(-2);
-            var moreThanMonth = today.AddDays(-60);
-            var moreThanYear = today.AddDays(-366);
+            var today = DateTimeOffset.Now.ToUnixTimeSeconds();
+            var yesterday = DateTimeOffset.Now.AddDays(-2).ToUnixTimeSeconds();
+            var moreThanMonth = DateTimeOffset.Now.AddDays(-60).ToUnixTimeSeconds();
+            var moreThanYear = DateTimeOffset.Now.AddDays(-366).ToUnixTimeSeconds();
 
             var data = new List<CoinPriceHistory>
             {
-                new CoinPriceHistory {  Timestamp =  today },
+                new CoinPriceHistory { Timestamp =  today },
                 new CoinPriceHistory { Timestamp =  yesterday},
                 new CoinPriceHistory { Timestamp =  moreThanMonth},
                 new CoinPriceHistory { Timestamp =  moreThanYear}
@@ -30,7 +50,8 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             var dataRepositorySetup = new Mock<IDataRepository>();
             var mappingProviderSetup = new Mock<IMappingServiceProvider>();
 
-            dataRepositorySetup.Setup(m => m.Get<CoinPriceHistory>()).Returns(() => {
+            dataRepositorySetup.Setup(m => m.Get<CoinPriceHistory>()).Returns(() =>
+            {
                 return data.AsQueryable();
             });
 
@@ -39,22 +60,21 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             {
                 Price = item.Price,
                 Symbol = item.Symbol,
-                Date = item.Timestamp
+                Timestamp = item.Timestamp
             }).ToList());
 
-            var coinManagementService = new CoinManagementService(dataRepositorySetup.Object, mappingProviderSetup.Object);
+            var coinManagementService = new CoinManagementServiceDailyImpl(dataRepositorySetup.Object, mappingProviderSetup.Object);
             var result = coinManagementService.GetPriceInfo(PriceInfoFilter.Today);
 
-            Assert.IsTrue(result.All(item => item.Date >= today.AddDays(-1)));
+            Assert.IsTrue(result.Prices.All(item => item.Timestamp >= DateTimeOffset.Now.AddDays(-1).ToUnixTimeSeconds()));
         }
 
         [TestMethod("Should return last 30 days data")]
         public void ShouldReturnLast30DaysData()
         {
-            var today = DateTime.Now;
-            var yesterday = today.AddDays(-2);
-            var moreThanMonth = today.AddDays(-60);
-            var moreThanYear = today.AddDays(-366);
+            var yesterday = DateTimeOffset.Now.AddDays(-2).ToUnixTimeSeconds();
+            var moreThanMonth = DateTimeOffset.Now.AddDays(-60).ToUnixTimeSeconds();
+            var moreThanYear = DateTimeOffset.Now.AddDays(-366).ToUnixTimeSeconds();
 
             var data = new List<CoinPriceHistory>
             {
@@ -66,7 +86,8 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             var dataRepositorySetup = new Mock<IDataRepository>();
             var mappingProviderSetup = new Mock<IMappingServiceProvider>();
 
-            dataRepositorySetup.Setup(m => m.Get<CoinPriceHistory>()).Returns(() => {
+            dataRepositorySetup.Setup(m => m.Get<CoinPriceHistory>()).Returns(() =>
+            {
                 return data.AsQueryable();
             });
 
@@ -75,22 +96,20 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             {
                 Price = item.Price,
                 Symbol = item.Symbol,
-                Date = item.Timestamp
+                Timestamp = item.Timestamp
             }).ToList());
 
-            var coinManagementService = new CoinManagementService(dataRepositorySetup.Object, mappingProviderSetup.Object);
+            var coinManagementService = new CoinManagementServiceMonthlyImpl(dataRepositorySetup.Object, mappingProviderSetup.Object);
             var result = coinManagementService.GetPriceInfo(PriceInfoFilter.Month);
 
-            var v = result.All(item => item.Date >= today.AddDays(-30));
-            Assert.IsTrue(result.All(item => item.Date >= today.AddDays(-30)));
+            Assert.IsTrue(result.Prices.All(item => item.Timestamp >= DateTimeOffset.Now.AddDays(-30).ToUnixTimeSeconds()));
         }
 
         [TestMethod("Should return last 365 days data")]
         public void ShouldReturnLast365DaysData()
         {
-            var today = DateTime.Now;
-            var moreThanMonth = today.AddDays(-60);
-            var moreThanYear = today.AddDays(-366);
+            var moreThanMonth = DateTimeOffset.Now.AddDays(-60).ToUnixTimeSeconds();
+            var moreThanYear = DateTimeOffset.Now.AddDays(-366).ToUnixTimeSeconds();
 
             var data = new List<CoinPriceHistory>
             {
@@ -101,7 +120,8 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             var dataRepositorySetup = new Mock<IDataRepository>();
             var mappingProviderSetup = new Mock<IMappingServiceProvider>();
 
-            dataRepositorySetup.Setup(m => m.Get<CoinPriceHistory>()).Returns(() => {
+            dataRepositorySetup.Setup(m => m.Get<CoinPriceHistory>()).Returns(() =>
+            {
                 return data.AsQueryable();
             });
 
@@ -110,13 +130,13 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             {
                 Price = item.Price,
                 Symbol = item.Symbol,
-                Date = item.Timestamp
+                Timestamp = item.Timestamp
             }).ToList());
 
-            var coinManagementService = new CoinManagementService(dataRepositorySetup.Object, mappingProviderSetup.Object);
+            var coinManagementService = new CoinManagementServiceAnnualImpl(dataRepositorySetup.Object, mappingProviderSetup.Object);
             var result = coinManagementService.GetPriceInfo(PriceInfoFilter.Month);
 
-            Assert.IsTrue(result.All(item => item.Date >= today.AddDays(-365)));
+            Assert.IsTrue(result.Prices.All(item => item.Timestamp >= DateTimeOffset.Now.AddDays(-365).ToUnixTimeSeconds()));
         }
     }
 }

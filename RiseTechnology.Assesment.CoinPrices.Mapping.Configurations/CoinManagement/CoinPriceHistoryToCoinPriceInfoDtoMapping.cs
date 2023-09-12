@@ -13,7 +13,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagem
                 var result = new CoinPriceInfoDto();
                 result.Price = source.Price;
                 result.Symbol = source.Symbol;
-                result.Date = source.Timestamp;
+                result.Timestamp = source.Timestamp;
                 return result;
             });
 
@@ -26,7 +26,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagem
                     var item = new CoinPriceInfoDto();
                     item.Price = source[index].Price;
                     item.Symbol = source[index].Symbol;
-                    item.Date = source[index].Timestamp;
+                    item.Timestamp = source[index].Timestamp;
                     result.Add(item);
                 }
                 return result;

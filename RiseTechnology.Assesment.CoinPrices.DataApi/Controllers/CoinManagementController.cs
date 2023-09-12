@@ -5,6 +5,7 @@ using RiseTechnology.Assesment.CoinPrices.Data.Dto;
 
 namespace RiseTechnology.Assesment.DataApi.Controllers
 {
+
     public class CoinManagementController : Controller
     {
 

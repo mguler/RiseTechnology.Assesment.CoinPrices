@@ -8,10 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -32,6 +38,7 @@
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data.Dto\RiseTechnology.Assesment.CoinPrices.Data.Dto.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Data\RiseTechnology.Assesment.CoinPrices.Data.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Integrations.BinanceImpl\RiseTechnology.Assesment.CoinPrices.Integrations.BinanceImpl.csproj" />
+    <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl\RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl.csproj" />
     <ProjectReference Include="..\RiseTechnology.Assesment.CoinPrices.Mapping.Configurations\RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.csproj" />
   </ItemGroup>
 
