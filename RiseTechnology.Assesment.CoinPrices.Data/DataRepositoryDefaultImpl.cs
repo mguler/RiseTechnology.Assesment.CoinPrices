@@ -33,16 +33,6 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
             _dataContext.SaveChanges();
             return entity;
         }
-
-        public IEnumerable<T> SaveAll<T>(IEnumerable<T> entities) where T : class
-        {
-            foreach (var entity in entities)
-            {
-                Save(entity);
-                yield return entity;
-            }
-        }
-
         private IClrPropertyGetter GetPrimaryKey<T>()
         {
             var key = typeof(T).FullName;

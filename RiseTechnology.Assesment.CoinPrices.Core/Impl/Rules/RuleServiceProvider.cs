@@ -17,8 +17,9 @@ namespace RiseTechnology.Assesment.CoinPrices.Core.Impl.Rules
 
         public IRuleServiceResult Apply<TArgument>(string ruleName, TArgument arg) where TArgument : class
         {
-            var rule = _cache[ruleName];
-            if (rule is null)
+            Delegate? rule;
+            var isRuleExists = _cache.TryGetValue(ruleName, out rule);
+            if (!isRuleExists)
             {
                 throw new Exception($"There is no ruleset registered with the name {ruleName}");
             }

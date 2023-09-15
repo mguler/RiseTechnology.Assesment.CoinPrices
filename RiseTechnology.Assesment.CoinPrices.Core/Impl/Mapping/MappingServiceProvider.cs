@@ -1,5 +1,4 @@
 ﻿using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
-using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 
 namespace RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping
 {

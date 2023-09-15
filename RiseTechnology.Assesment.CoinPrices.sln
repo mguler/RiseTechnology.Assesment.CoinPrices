@@ -47,7 +47,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.Rules.Tests", "RiseTechnology.Assesment.CoinPrices.Rules.Tests\RiseTechnology.Assesment.CoinPrices.Rules.Tests.csproj", "{BAB307E9-3FAE-4712-8CD8-0B849FA60ACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl", "RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl\RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl.csproj", "{9C645CB6-D11E-4FB1-ACCE-D8376F5EFDFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl", "RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl\RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl.csproj", "{9C645CB6-D11E-4FB1-ACCE-D8376F5EFDFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseTechnology.Assesment.CoinPrices.Core.Tests", "RiseTechnology.Assesment.CoinPrices.Core.Tests\RiseTechnology.Assesment.CoinPrices.Core.Tests.csproj", "{FEF6C03A-3F0B-4466-9A20-50DD155544F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseTechnology.Assesment.CoinPrices.Data.Tests", "RiseTechnology.Assesment.CoinPrices.Data.Tests\RiseTechnology.Assesment.CoinPrices.Data.Tests.csproj", "{8BBD63B7-9795-4426-BB86-43A14A11E144}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +119,14 @@ Global
 		{9C645CB6-D11E-4FB1-ACCE-D8376F5EFDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C645CB6-D11E-4FB1-ACCE-D8376F5EFDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C645CB6-D11E-4FB1-ACCE-D8376F5EFDFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF6C03A-3F0B-4466-9A20-50DD155544F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF6C03A-3F0B-4466-9A20-50DD155544F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF6C03A-3F0B-4466-9A20-50DD155544F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF6C03A-3F0B-4466-9A20-50DD155544F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BBD63B7-9795-4426-BB86-43A14A11E144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BBD63B7-9795-4426-BB86-43A14A11E144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BBD63B7-9795-4426-BB86-43A14A11E144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BBD63B7-9795-4426-BB86-43A14A11E144}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +147,8 @@ Global
 		{0E1F02CC-B61A-4E7C-BF25-F995AE8421E4} = {BCAECD3C-34A7-4C45-AD86-F1F4AE5B3B2A}
 		{BAB307E9-3FAE-4712-8CD8-0B849FA60ACF} = {81E109B8-3E19-442A-A38B-B09CCB89ABF0}
 		{9C645CB6-D11E-4FB1-ACCE-D8376F5EFDFC} = {A84A8323-B790-45D4-9CDC-630B7C662046}
+		{FEF6C03A-3F0B-4466-9A20-50DD155544F5} = {81E109B8-3E19-442A-A38B-B09CCB89ABF0}
+		{8BBD63B7-9795-4426-BB86-43A14A11E144} = {81E109B8-3E19-442A-A38B-B09CCB89ABF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FAE0051-225E-455B-9016-9B7EF8B6BC12}
