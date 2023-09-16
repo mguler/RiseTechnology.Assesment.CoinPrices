@@ -3,8 +3,16 @@ using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Rules;
 
 namespace RiseTechnology.Assesment.CoinPrices.Core.Impl.Rules
 {
+    /// <summary>
+    /// Rule service registration extensions
+    /// </summary>
     public static class RuleServiceExtension
     {
+        /// <summary>
+        /// This extension is a helper method that registers rule service with pre-defined rule configurations 
+        /// </summary>
+        /// <param name="services">Instance of IServiceCollection</param>
+        /// <param name="configurationCallback">A callback for setup rule configurations</param>
         public static void AddRuleService(this IServiceCollection services, Action<RuleServiceExtensionOptions> configurationCallback)
         {
             var options = new RuleServiceExtensionOptions();

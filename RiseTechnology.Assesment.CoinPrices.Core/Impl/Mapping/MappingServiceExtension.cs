@@ -3,8 +3,16 @@ using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 
 namespace RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping
 {
+    /// <summary>
+    /// Mapping service registration extensions
+    /// </summary>
     public static class MappingServiceExtension
     {
+        /// <summary>
+        /// This extension is a helper method that registers mapping service with pre-defined mapping configurations 
+        /// </summary>
+        /// <param name="services">Instance of IServiceCollection</param>
+        /// <param name="configurationCallback">A callback for setup mapping configurations</param>
         public static void AddMappingService(this IServiceCollection services, Action<MappingServiceExtensionOptions> configurationCallback)
         {
             var options = new MappingServiceExtensionOptions();
