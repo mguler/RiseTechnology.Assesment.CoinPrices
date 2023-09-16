@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
-using RiseTechnology.Assesment.CoinPrices.Integrations.BinanceImpl;
 using RiseTechnology.Assesment.CoinPrices.Core.Impl.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Data;
@@ -11,7 +10,6 @@ using RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl;
 
 IConfiguration configuration = new ConfigurationBuilder()
    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-   .AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true)
    .AddEnvironmentVariables()
    .AddCommandLine(args)
    .Build();
