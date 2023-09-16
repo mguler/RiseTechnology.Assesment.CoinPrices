@@ -7,6 +7,9 @@ using RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManagementServiceParameticImpl
 {
+    /// <summary>
+    /// Annual implementation of ICoinManagementService
+    /// </summary>
     public class CoinManagementServiceAnnualImpl : ICoinManagementService
     {
         private readonly IDataRepository _dataRepository;
@@ -16,6 +19,11 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManage
             _dataRepository = dataRepository;
             _mappingerviceProvider = mappingerviceProvider;
         }
+        /// <summary>
+        /// Returns annual coin price information
+        /// </summary>
+        /// <param name="getPriceInfoFilterDto">The period that the prices belong</param>
+        /// <returns>Annual price information of last year</returns>
         public GetPriceInfoResultDto GetPriceInfo(PriceInfoFilter getPriceInfoFilterDto)
         {
             var endDate = DateTimeOffset.Now;

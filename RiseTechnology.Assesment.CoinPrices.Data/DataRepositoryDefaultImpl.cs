@@ -5,7 +5,7 @@ using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 namespace RiseTechnology.Assesment.CoinPrices.Data
 {
     /// <summary>
-    /// The default implementation of "IDataRepository" interface that supplies database access and basic functionality
+    /// The default entity framework implementation of "IDataRepository" interface that supplies basic database access and functionality
     /// </summary>
     public class DataRepositoryDefaultImpl :IDataRepository
     {
@@ -16,7 +16,19 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
         {
             _dataContext = dataContext;
         }
+        /// <summary>
+        /// This method returns the data from the table that referenced by the type given in the type parameter 
+        /// </summary>
+        /// <typeparam name="T">The type that refers a database table</typeparam>
+        /// <returns>An instance of IQueryable that contains data</returns>
         public IQueryable<T> Get<T>() where T : class => _dataContext.Set<T>();
+
+        /// <summary>
+        /// This method performs insert,update and delete operations
+        /// </summary>
+        /// <typeparam name="T">A Clr type that refers to a database table</typeparam>
+        /// <param name="entity">A instance of database model that contains data</param>
+        /// <returns>returns processed model instance</returns>
         public T Save<T>(T entity) where T : class
         {
             var primaryKey = GetPrimaryKey<T>();

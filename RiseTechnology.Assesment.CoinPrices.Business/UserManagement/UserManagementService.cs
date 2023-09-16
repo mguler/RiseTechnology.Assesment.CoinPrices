@@ -13,6 +13,9 @@ using RiseTechnology.Assesment.CoinPrices.Dto.UserManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
 {
+    /// <summary>
+    /// Default implementation of IUserManagementService
+    /// </summary>
     public class UserManagementService: IUserManagementService
     {
         private readonly IOptions<TokenOptions> _tokenOptions;
@@ -30,6 +33,12 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
             _ruleServiceProvider = ruleServiceProvider;
             _jwtService = jwtService;
         }
+
+        /// <summary>
+        /// This method registers a user with the given information
+        /// </summary>
+        /// <param name="registerDto">Contains information about the user to be registered</param>
+        /// <returns>Contains information about the result of the register operation</returns>
         public ServiceResultDto Register(RegisterDto registerDto)
         {
             var result = new ServiceResultDto();
@@ -61,6 +70,11 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
             }
             return result;
         }
+        /// <summary>
+        /// This method supplies login functionality 
+        /// </summary>
+        /// <param name="loginDto">User credentials</param>
+        /// <returns>Information about the login information if the operation is successful this object contains a JWT token</returns>
         public ServiceResultDto<LoginResultDto> Login(LoginDto loginDto)
         {
             var result = new ServiceResultDto<LoginResultDto> { Data = new LoginResultDto() };
@@ -98,7 +112,10 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.UserManagement
             }
             return result;
         }
-
+        /// <summary>
+        /// This method supplies logout functionality if operation is successful related cookies will be deleted 
+        /// </summary>
+        /// <returns>Contains information about operation result</returns>
         public ServiceResultDto Logout() 
         {
             var result = new ServiceResultDto<LoginResultDto> { Data = new LoginResultDto() };

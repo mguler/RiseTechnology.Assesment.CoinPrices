@@ -7,6 +7,9 @@ using RiseTechnology.Assesment.CoinPrices.Data.Model.CoinManagement;
 
 namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManagementServiceParameticImpl
 {
+    /// <summary>
+    /// Daily implementation of ICoinManagementService
+    /// </summary>
     public class CoinManagementServiceDailyImpl : ICoinManagementService
     {
         private readonly IDataRepository _dataRepository;
@@ -16,6 +19,11 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManage
             _dataRepository = dataRepository;
             _mappingerviceProvider = mappingerviceProvider;
         }
+        /// <summary>
+        /// Returns daily coin price information
+        /// </summary>
+        /// <param name="getPriceInfoFilterDto">The period that the prices belong</param>
+        /// <returns>Daily price information of last 24 hours</returns>
         public GetPriceInfoResultDto GetPriceInfo(PriceInfoFilter getPriceInfoFilterDto)
         {
             var endDate = DateTimeOffset.Now;
