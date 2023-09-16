@@ -14,8 +14,6 @@ IConfiguration configuration = new ConfigurationBuilder()
    .AddCommandLine(args)
    .Build();
 
-Console.WriteLine(configuration.GetConnectionString("CoinPrices"));
-
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
