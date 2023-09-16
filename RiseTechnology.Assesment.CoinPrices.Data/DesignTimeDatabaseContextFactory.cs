@@ -9,7 +9,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Data
         {
             try
             {
-                var connectionStr = "Server=localhost;Database=CoinPrices;User Id=testuser;Password=10105400;TrustServerCertificate=True";
+                var connectionStr = "Server=localhost;Database=CoinPrices;User Id=appuser;Password=Ds$1df#!a84@2$2!a-;TrustServerCertificate=True";
                 var optionsBuilder = new DbContextOptionsBuilder<DatabaseContextDefaultImpl>();
 
                 optionsBuilder.UseSqlServer(connectionStr);

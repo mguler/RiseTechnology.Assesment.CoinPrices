@@ -15,17 +15,12 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement
     {
         private readonly IDataRepository _dataRepository;
         private readonly IMappingServiceProvider _mappingerviceProvider;
-        //public CoinManagementService(IDataRepository dataRepository, IMappingServiceProvider mappingerviceProvider)
-        //{
-        //    _dataRepository = dataRepository;
-        //    _mappingerviceProvider = mappingerviceProvider;
-        //}
 
         private readonly Dictionary<string, ICoinManagementService> _coinManagementSpecificServices;
-        public CoinManagementService(Dictionary<string,ICoinManagementService> coinManagementSpecificServices)
+        public CoinManagementService(Dictionary<string, ICoinManagementService> coinManagementSpecificServices)
         {
             _coinManagementSpecificServices = coinManagementSpecificServices;
-                }
+        }
         public GetPriceInfoResultDto GetPriceInfo(PriceInfoFilter getPriceInfoFilterDto)
         {
             //We are using multiple implementations of the service to handle open/closed principle
