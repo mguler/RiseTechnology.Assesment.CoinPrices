@@ -1,6 +1,6 @@
 ﻿namespace RiseTechnology.Assesment.CoinPrices.Dto.UserManagement
 {
-    public class RegisterDto
+    public record RegisterDto
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
