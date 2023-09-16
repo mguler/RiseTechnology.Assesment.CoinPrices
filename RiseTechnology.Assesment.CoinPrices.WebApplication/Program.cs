@@ -19,8 +19,9 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
 
 var tokenOptions = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<TokenOptions>(tokenOptions);
