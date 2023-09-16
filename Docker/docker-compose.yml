@@ -12,8 +12,8 @@ services:
     #   - ./datadrive/MSSqlServer/data:/var/opt/mssql/data
     #   - ./datadrive/MSSqlServer/log:/var/opt/mssql/log
     #   - ./datadrive/MSSqlServer/backup:/var/opt/mssql/backup
-    environment:
-      MSSQL_SA_PASSWORD: "murat123456!"
+    environment:            
+      MSSQL_SA_PASSWORD: "#!u*&g#2-H2!b5/%2@$-"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Enterprise"
     networks:
