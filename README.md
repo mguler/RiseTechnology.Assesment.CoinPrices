@@ -8,10 +8,10 @@ Asagidaki yonergeleri izleyerek uygulamayi bilgisayariniza indirip kurabilir ve 
  
 ### Gereksinimler
 
-.Net 7 runtime & Asp.Net 7 runtime
-Docker Desktop & docker compose
-git cli
-Windows Powershell
+- .Net 7 runtime & Asp.Net 7 runtime
+- Docker Desktop & docker compose
+- git cli
+- Windows Powershell
 
 ### Kurulum ve Calistirma
 
@@ -45,16 +45,16 @@ Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme
 
 ## Araclar  
 
-Visual Studio 2022 Community Edition
-Docker Desktop
-GitHub
-Windows Powershell
-Nuget Package Manager
-Chrome Browser & Development Tools
+- Visual Studio 2022 Community Edition
+- Docker Desktop
+- GitHub
+- Windows Powershell
+- Nuget Package Manager
+- Chrome Browser & Development Tools
 
 ## Gelistiriciler
 
-Murat Guler
+M. Guler
 
 ## Lisans
 
