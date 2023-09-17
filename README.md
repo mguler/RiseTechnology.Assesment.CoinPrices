@@ -41,7 +41,7 @@ Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme
 	WebApplication   |       /Views/User/Login.cshtml
 	WebApplication   |       /Views/Shared/Login.cshtml 
 
-	Eger yukaridaki view hatasi alinirsa Program.cs icerisindeki *builder.Services.AddControllersWithViews();* satiri kaldirip , solution klasoru icerisinde ./dotnet watch run komutu ile uygulama calistirildiktan sonra tekrardan *builder.Services.AddControllersWithViews();* eklenip uygulama calistirildiginda hatanin duzeldigi goruldu , bu hata ile ilgili kalici cozum bir sonraki surumde eklenecek
+	Eger yukaridaki view hatasi alinirsa Program.cs icerisindeki *builder.Services.AddControllersWithViews();* satiri kaldirip , solution klasoru icerisinde ./dotnet watch run komutu ile hot reload aktif edilerek calistirildiginda gecici cozum saglandi. Daha sonra Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation pakedi uygulamaya eklenerek sorun cozuldu   
 
 ## Araclar  
 
@@ -54,7 +54,7 @@ Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme
 
 ## Gelistiriciler
 
-M. Guler
+M. Güler
 
 ## Lisans
 
