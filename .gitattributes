@@ -63,4 +63,4 @@
 #*.RTF   diff=astextplain
 
   
-./Docker/wait-for-it.sh text eol=lf
+*.sh text eol=lf
