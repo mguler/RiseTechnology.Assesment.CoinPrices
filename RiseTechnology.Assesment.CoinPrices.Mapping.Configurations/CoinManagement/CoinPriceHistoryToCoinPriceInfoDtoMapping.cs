@@ -22,7 +22,11 @@ namespace RiseTechnology.Assesment.CoinPrices.Mapping.Configurations.CoinManagem
                 var result = new List<CoinPriceInfoDto>();
                 for (var index = 0; index < source.Count; index++)
                 {
-
+                    if (source[index] is null) 
+                    {
+                        result.Add(null);
+                        continue;
+                    }
                     var item = new CoinPriceInfoDto();
                     item.Price = source[index].Price;
                     item.Symbol = source[index].Symbol;

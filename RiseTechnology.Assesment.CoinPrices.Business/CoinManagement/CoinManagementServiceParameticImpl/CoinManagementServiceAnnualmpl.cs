@@ -1,4 +1,5 @@
-﻿using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
+﻿using Microsoft.EntityFrameworkCore;
+using RiseTechnology.Assesment.CoinPrices.Business.Abstract.CoinManagement;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Data;
 using RiseTechnology.Assesment.CoinPrices.Core.Abstract.Mapping;
 using RiseTechnology.Assesment.CoinPrices.Data.Dto;
@@ -26,27 +27,33 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.CoinManagement.CoinManage
         /// <returns>Annual price information of last year</returns>
         public GetPriceInfoResultDto GetPriceInfo(PriceInfoFilter getPriceInfoFilterDto)
         {
-            var endDate = DateTimeOffset.Now;
-            var startDate = endDate.AddDays(-365);
-            var dateFilter = startDate.ToUnixTimeSeconds();
+            // !!!! Timeoffset data stored as an utc date time value in the database !!!! // 
+            var localStartDate = DateTimeOffset.Now.AddDays(-365);
+            var utcEndDate = DateTimeOffset.UtcNow;
+            var utcStartDate = utcEndDate.AddDays(-365);
+            var utcDateFilter = utcStartDate.ToUnixTimeSeconds();
 
-            var prices = _dataRepository.Get<CoinPriceHistory>().Where(price => price.Timestamp >= dateFilter).GroupBy(price => price.Timestamp / 86400)
+            var prices = _dataRepository.Get<CoinPriceHistory>().Where(price => price.Timestamp >= utcDateFilter)
+                .GroupBy(price => price.Timestamp / 86400)
                 .Select(g => new CoinPriceHistory
                 {
-                    Price = g.Max(coin => coin.Price),
+                    Price = g.OrderBy(coin => coin.Timestamp).Last().Price,
                     Timestamp = g.Min(coin => coin.Timestamp)
                 }).ToList();
 
-            var pricesResult = _mappingerviceProvider.Map<List<CoinPriceInfoDto>>(prices);
-            var monthsCount = 1+Math.Abs(12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month);
+            var ordered = Enumerable
+                 .Range(0, 366)
+                 .Select(n => prices.SingleOrDefault(price => price.Timestamp / 86400 == n + utcDateFilter / 86400)).ToList();
+
+            var dtoMappedPrices = _mappingerviceProvider.Map<List<CoinPriceInfoDto>>(ordered);
 
             var labels = Enumerable
-                .Range(0, monthsCount)
-                .Select(n => startDate.AddMonths(n)).Select(item => item.ToString("yyyy-MMM")).ToList();
+                .Range(0, 366)
+                .Select(n => n % 30 == 0 ? utcStartDate.AddDays(n).ToString("yyyy-MMM") : "").ToList();
 
             var result = new GetPriceInfoResultDto
             {
-                Prices = pricesResult,
+                Prices = dtoMappedPrices,
                 Labels = labels
             };
             return result;

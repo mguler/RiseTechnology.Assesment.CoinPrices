@@ -24,6 +24,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl
         {
             var mappingConfiguration = new CoinDeskDtoToCoinPriceHistoryMapping();
             mappingConfiguration.Configure(_mappingServiceProvider);
+            var priceHistory = _dataRepository.Get<CoinPriceHistory>();
 
             while (!cancelToken.IsCancellationRequested)
             {
@@ -36,6 +37,10 @@ namespace RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl
                     var prices = _mappingServiceProvider.Map<List<CoinPriceHistory>>(response.data.entries);
                     foreach (var priceInfo in prices)
                     {
+                        if (priceHistory.Any(price => price.Timestamp == priceInfo.Timestamp)) 
+                        {
+                            continue;
+                        }
                         _dataRepository.Save(priceInfo);
                     }
 
