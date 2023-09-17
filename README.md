@@ -31,7 +31,7 @@ Unit testleri uygulamak icin asagidaki komutu calistiriniz
 
 ### Git stratejisi
 
-Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme branchlarinin isimlendirilmesi dev-[gelistirme konusu] sablonu ile verildi. Gelistirme tamamlandiginda calisir durumdaki kod commit edilerek master branch'e pull request acildi ve kod merge edildi. Tum commitler mevcut gelistirm tamamlandiginda yada gunluk olarak calisir durumdaki kodlarin commit edilmesi seklinde yapildi
+Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme branchlarinin isimlendirilmesi dev-[gelistirme konusu] sablonu ile verildi. Gelistirme tamamlandiginda calisir durumdaki kod commit edilerek master branch'e pull request acildi ve kod merge edildi. Tum commitler uzerinde calisilan gelistirme tamamlandiginda yada gunluk olarak calisir durumdaki kodlarin commit edilmesi seklinde yapildi
 
 ## Karsilasilan Sorunlar
 
