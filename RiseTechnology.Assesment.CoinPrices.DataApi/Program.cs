@@ -98,7 +98,4 @@ app.UseAuthorization();
 app.MapControllerRoute(name: "get-prices", pattern: "get-prices-{priceInfoFilter:regex(today|month|year)}", defaults: new { controller = "CoinManagement", action = "GetPrices" });
 #endregion End Of Coin Management
 
-var dbContext = app.Services.CreateScope().ServiceProvider.GetService<DbContext>();
-dbContext.Database.EnsureCreated();
-
 app.Run();
