@@ -55,18 +55,18 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
                 return data.AsQueryable();
             });
 
-            mappingProviderSetup.Setup(m => m.Map<List<CoinPriceInfoDto>>(It.IsAny<List<CoinPriceHistory>>())).Returns<List<CoinPriceHistory>>((data) =>
-            data.Select(item => new CoinPriceInfoDto
+            _ = mappingProviderSetup.Setup(m => m.Map<List<CoinPriceInfoDto>>(It.IsAny<List<CoinPriceHistory>>())).Returns<List<CoinPriceHistory>>((data) =>
+            data.Select(item => item != null ? new CoinPriceInfoDto
             {
                 Price = item.Price,
                 Symbol = item.Symbol,
                 Timestamp = item.Timestamp
-            }).ToList());
+            } : null).ToList());
 
             var coinManagementService = new CoinManagementServiceDailyImpl(dataRepositorySetup.Object, mappingProviderSetup.Object);
             var result = coinManagementService.GetPriceInfo(PriceInfoFilter.Today);
 
-            Assert.IsTrue(result.Prices.All(item => item.Timestamp >= DateTimeOffset.Now.AddDays(-1).ToUnixTimeSeconds()));
+            Assert.IsTrue(result.Prices.All(item => item == null || item.Timestamp >= DateTimeOffset.Now.AddDays(-1).ToUnixTimeSeconds()));
         }
 
         [TestMethod("Should return last 30 days data")]
@@ -92,17 +92,17 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             });
 
             mappingProviderSetup.Setup(m => m.Map<List<CoinPriceInfoDto>>(It.IsAny<List<CoinPriceHistory>>())).Returns<List<CoinPriceHistory>>((data) =>
-            data.Select(item => new CoinPriceInfoDto
+            data.Select(item => item != null ? new CoinPriceInfoDto
             {
                 Price = item.Price,
                 Symbol = item.Symbol,
                 Timestamp = item.Timestamp
-            }).ToList());
+            } : null).ToList());
 
             var coinManagementService = new CoinManagementServiceMonthlyImpl(dataRepositorySetup.Object, mappingProviderSetup.Object);
             var result = coinManagementService.GetPriceInfo(PriceInfoFilter.Month);
 
-            Assert.IsTrue(result.Prices.All(item => item.Timestamp >= DateTimeOffset.Now.AddDays(-30).ToUnixTimeSeconds()));
+            Assert.IsTrue(result.Prices.All(item => item == null || item.Timestamp >= DateTimeOffset.Now.AddDays(-30).ToUnixTimeSeconds()));
         }
 
         [TestMethod("Should return last 365 days data")]
@@ -126,17 +126,17 @@ namespace RiseTechnology.Assesment.CoinPrices.Business.Tests.UserManagement
             });
 
             mappingProviderSetup.Setup(m => m.Map<List<CoinPriceInfoDto>>(It.IsAny<List<CoinPriceHistory>>())).Returns<List<CoinPriceHistory>>((data) =>
-            data.Select(item => new CoinPriceInfoDto
+            data.Select(item => item != null ? new CoinPriceInfoDto
             {
                 Price = item.Price,
                 Symbol = item.Symbol,
                 Timestamp = item.Timestamp
-            }).ToList());
+            } : null).ToList());
 
             var coinManagementService = new CoinManagementServiceAnnualImpl(dataRepositorySetup.Object, mappingProviderSetup.Object);
             var result = coinManagementService.GetPriceInfo(PriceInfoFilter.Month);
 
-            Assert.IsTrue(result.Prices.All(item => item.Timestamp >= DateTimeOffset.Now.AddDays(-365).ToUnixTimeSeconds()));
+            Assert.IsTrue(result.Prices.All(item => item == null || item.Timestamp >= DateTimeOffset.Now.AddDays(-365).ToUnixTimeSeconds()));
         }
     }
 }

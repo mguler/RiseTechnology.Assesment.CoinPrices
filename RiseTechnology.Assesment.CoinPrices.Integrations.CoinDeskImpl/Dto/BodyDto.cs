@@ -1,6 +1,6 @@
 ﻿namespace RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl.Dto
 {
-    public class BodyDto
+    public record BodyDto
     {
         public string iso { get; set; }
         public string name { get; set; }
