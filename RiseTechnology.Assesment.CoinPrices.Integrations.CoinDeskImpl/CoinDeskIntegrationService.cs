@@ -52,7 +52,7 @@ namespace RiseTechnology.Assesment.CoinPrices.Integrations.CoinDeskImpl
                     _logger.LogError($"Error ocurred at: {DateTimeOffset.Now} {ex}");
                 }
 
-                await Task.Delay(1000, cancelToken);
+                await Task.Delay(60000, cancelToken);
             }
         }
     }
