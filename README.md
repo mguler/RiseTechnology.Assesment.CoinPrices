@@ -4,7 +4,7 @@ Bitcoin fiyat grafigi uygulamasi. Bitcoin fiyatlarini cizgi grafik uzerinde gost
 
 ## Baslangic
 
-Asagidaki yonergeleri izleyerek uygulamayi bilgisayariniza indirip kurabilir ve calistirabilirsiniz.
+Asagidaki yonergeleri izleyerek uygulamayi bilgisayariniza indirip, kurabilir ve calistirabilirsiniz.
  
 ### Gereksinimler
 
