@@ -121,7 +121,5 @@ app.MapControllerRoute(name: "logout", pattern: "logout", defaults: new { contro
 app.MapControllerRoute(name: "coin-price-showcase", pattern: "showcase", defaults: new { controller = "CoinManagement", action = "Showcase" });
 #endregion End Of Coin Management
 
-var dbContext = app.Services.CreateScope().ServiceProvider.GetService<DbContext>();
-dbContext.Database.EnsureCreated();
 
 app.Run();
