@@ -41,7 +41,7 @@ Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme
 	WebApplication   |       /Views/User/Login.cshtml
 	WebApplication   |       /Views/Shared/Login.cshtml 
 
-	Eger yukaridaki view hatasi alindi, Cozum icin solution klasoru icerisinde _./dotnet watch run_ komutu ile _hot reload_ aktif edilerek calistirildiginda gecici cozum saglandi. Daha sonra Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation pakedi uygulamaya eklenerek sorun cozuldu   
+	Eger yukaridaki view hatasi alindi, Cozum icin solution klasoru icerisinde *_./dotnet watch* run_ komutu ile *_hot reload_* aktif edilerek calistirildiginda gecici cozum saglandi. Daha sonra Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation pakedi uygulamaya eklenerek sorun cozuldu   
 4) docker-compose.yml dosyasinda tanimli olan environment variable'da $ karakteri kullanildigi icin "Invalid Interpolation Format Error in Docker Compose" hatasi alindi $$ seklinde cift $ karakteri kullanilarak escape edilebilecegi anlasildi ilgili environment variable degeri degistirildi
      
 ## Araclar  
