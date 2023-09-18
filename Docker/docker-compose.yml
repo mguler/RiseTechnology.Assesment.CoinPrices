@@ -13,7 +13,7 @@ services:
     #   - ./datadrive/MSSqlServer/log:/var/opt/mssql/log
     #   - ./datadrive/MSSqlServer/backup:/var/opt/mssql/backup
     environment:            
-      MSSQL_SA_PASSWORD: "#!u*&g#2-H2!b5/%2@$-"
+      MSSQL_SA_PASSWORD: "141516Aa!"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Enterprise"
     networks:
