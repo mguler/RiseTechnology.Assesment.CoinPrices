@@ -42,7 +42,8 @@ Gelistirme yapilmak icin master branch'tan yeni bir branch klonlandi. Gelistirme
 	WebApplication   |       /Views/Shared/Login.cshtml 
 
 	Eger yukaridaki view hatasi alinirsa Program.cs icerisindeki *builder.Services.AddControllersWithViews();* satiri kaldirip , solution klasoru icerisinde ./dotnet watch run komutu ile hot reload aktif edilerek calistirildiginda gecici cozum saglandi. Daha sonra Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation pakedi uygulamaya eklenerek sorun cozuldu   
-
+4) docker-compose.yml dosyasinda tanimli olan environment variable'da $ karakteri kullanildigi icin "Invalid Interpolation Format Error in Docker Compose" hatasi alindi $$ seklinde cift $ karakteri kullanilarak escape edilebilecegi anlasildi ilgili environment variable degeri degistirildi
+     
 ## Araclar  
 
 - Visual Studio 2022 Community Edition
