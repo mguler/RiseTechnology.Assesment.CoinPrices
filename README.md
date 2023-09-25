@@ -15,7 +15,7 @@ Asagidaki yonergeleri izleyerek uygulamayi bilgisayariniza indirip, kurabilir ve
 
 ### Kurulum ve Calistirma
 
-Uygulamayi clonu olusturmak ve calistirmak icin asagidaki komutlari sirasi ile uygulayiniz
+Uygulamainin lokal clonunu olusturmak ve calistirmak icin asagidaki komutlari sirasi ile uygulayiniz
 
 .\git clone https://github.com/mguler/RiseTechnology.Assesment.CoinPrices.git
 
